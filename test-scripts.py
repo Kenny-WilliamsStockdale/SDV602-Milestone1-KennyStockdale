@@ -25,7 +25,7 @@ def event():
     while True:             # The Event Loop
         window, event, values = sg.read_all_windows()
         if event == sg.WIN_CLOSED or event == 'Exit Application':
-            window.close()   # if closing win 1, exit program
+            window.close()  
             break
 
    
