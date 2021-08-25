@@ -1,4 +1,9 @@
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import PySimpleGUI as sg
+import matplotlib
+matplotlib.use('TkAgg')
 """
 Making test scripts for Data Explorer screens and various connecting interfaces 
  
@@ -15,29 +20,202 @@ def login_main():
 
 def Data_source_page():
     layout = [
-        [sg.Button('Issue dates'), sg.Button('Current status')],
-        [sg.Button('Number of owners'), sg.Button('Upload new data')],
+        [sg.Button('Property issue dates'), sg.Button('Current property status')],
+        [sg.Button('Number of property owners'), sg.Button('Upload new data')],
         [sg.Button('Logout')]]
     return sg.Window('Data Source Page', layout, finalize=True, size=(500,150), element_justification='c' )
 
-def DES1():
-    layout = [
-        [sg.Button('ZOOM +'), sg.Button('ZOOM -')],
-        [sg.Multiline(default_text='Data Information Summary:', size=(35, 5)), sg.Multiline(default_text='Chat System:',size=(35, 5))],
-        [sg.Button('Next'), sg.Button('Previous')],
-        [sg.Button('Back'), sg.Button('Logout')],
-        ]
-    return sg.Window('Property Issue Dates', layout, finalize=True, size=(800,450))
+def DataExplorerScreen1():
+# ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE -------------------------------
+    labels = ['G1', 'G2', 'G3', 'G4', 'G5']
+    men_means = [20, 34, 30, 35, 27]
+    women_means = [25, 32, 34, 20, 25]
 
-def event():
-    window1 = None  #window1 = login_main()
-    window2 = Data_source_page()
-    window3 = DES1()
-    while True:             # The Event Loop
-        window, event, values = sg.read_all_windows()
-        if event == sg.WIN_CLOSED or event == 'Exit Application':
-            window.close()  
-            break
+    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+    t = np.arange(len(labels))
+    fig, ax = plt.subplots()
+    width = 0.35
+    rects1 = ax.bar(t - width/2, men_means, width, label='Men')
+    rects2 = ax.bar(t + width/2, women_means, width, label='Women')
+
+    ax.set_ylabel('Scores')
+    ax.set_title('Scores by group and gender')
+    ax.set_xticks(t)
+    ax.set_xticklabels(labels)
+    ax.legend()
+
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+
+    fig.tight_layout()
+
+    # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
+
+    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+
+    def draw_figure(canvas, figure):
+            figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
+            figure_canvas_agg.draw()
+            figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
+            return figure_canvas_agg
+
+    # ------------------------------- Beginning of GUI CODE -------------------------------
+
+    # define the window layout
+    layout = [[sg.Canvas(key='-CANVAS-')],
+            [sg.Button('ZOOM +'), sg.Button('ZOOM -')],
+            [sg.Multiline(default_text='Data Information Summary:', size=(35, 5)), sg.Multiline(default_text='Chat System:',size=(35, 5))],
+            [sg.Button('Previous'), sg.Button('Next')],
+            [sg.Button('Back'), sg.Button('Logout')]]
+
+    # create the form and show it without the plot
+    window = sg.Window('Property issue dates', layout, finalize=True, element_justification='center', size=(800, 700))
+
+    # add the plot to the window
+    fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
+
+    event, values = window.read()
+    print(event, values)
+    
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'Previous':
+        window.close()
+        DataExplorerScreen3()
+    if event == 'Next':
+        window.close()
+        DataExplorerScreen2()
+            
+def DataExplorerScreen2():
+# ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE -------------------------------
+    labels = ['G1', 'G2', 'G3', 'G4', 'G5']
+    men_means = [20, 34, 30, 35, 27]
+    women_means = [25, 32, 34, 20, 25]
+
+    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+    t = np.arange(len(labels))
+    fig, ax = plt.subplots()
+    width = 0.35
+    rects1 = ax.bar(t - width/2, men_means, width, label='Men')
+    rects2 = ax.bar(t + width/2, women_means, width, label='Women')
+
+    ax.set_ylabel('Scores')
+    ax.set_title('Scores by group and gender')
+    ax.set_xticks(t)
+    ax.set_xticklabels(labels)
+    ax.legend()
+
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+
+    fig.tight_layout()
+
+    # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
+
+    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+
+    def draw_figure(canvas, figure):
+            figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
+            figure_canvas_agg.draw()
+            figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
+            return figure_canvas_agg
+
+    # ------------------------------- Beginning of GUI CODE -------------------------------
+
+    # define the window layout
+    layout = [[sg.Canvas(key='-CANVAS-')],
+            [sg.Button('ZOOM +'), sg.Button('ZOOM -')],
+            [sg.Multiline(default_text='Data Information Summary:', size=(35, 5)), sg.Multiline(default_text='Chat System:',size=(35, 5))],
+            [sg.Button('Previous'), sg.Button('Next')],
+            [sg.Button('Back'), sg.Button('Logout')]]
+
+    # create the form and show it without the plot
+    window = sg.Window('Current property status', layout, finalize=True, element_justification='center', size=(800, 700))
+
+    # add the plot to the window
+    fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
+
+    event, values = window.read()
+    print(event, values)
+    
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'Previous':
+        window.close()
+        DataExplorerScreen1()
+    if event == 'Next':
+        window.close()
+        DataExplorerScreen3()
+    
+def DataExplorerScreen3():
+# ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE -------------------------------
+    labels = ['G1', 'G2', 'G3', 'G4', 'G5']
+    men_means = [20, 34, 30, 35, 27]
+    women_means = [25, 32, 34, 20, 25]
+
+    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+    t = np.arange(len(labels))
+    fig, ax = plt.subplots()
+    width = 0.35
+    rects1 = ax.bar(t - width/2, men_means, width, label='Men')
+    rects2 = ax.bar(t + width/2, women_means, width, label='Women')
+
+    ax.set_ylabel('Scores')
+    ax.set_title('Scores by group and gender')
+    ax.set_xticks(t)
+    ax.set_xticklabels(labels)
+    ax.legend()
+
+    ax.bar_label(rects1, padding=3)
+    ax.bar_label(rects2, padding=3)
+
+    fig.tight_layout()
+
+    # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
+
+    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+
+    def draw_figure(canvas, figure):
+            figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
+            figure_canvas_agg.draw()
+            figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
+            return figure_canvas_agg
+
+    # ------------------------------- Beginning of GUI CODE -------------------------------
+
+    # define the window layout
+    layout = [[sg.Canvas(key='-CANVAS-')],
+            [sg.Button('ZOOM +'), sg.Button('ZOOM -')],
+            [sg.Multiline(default_text='Data Information Summary:', size=(35, 5)), sg.Multiline(default_text='Chat System:',size=(35, 5))],
+            [sg.Button('Previous'), sg.Button('Next')],
+            [sg.Button('Back'), sg.Button('Logout')]]
+
+    # create the form and show it without the plot
+    window = sg.Window('Number of property owners', layout, finalize=True, element_justification='center', size=(800, 700))
+
+    # add the plot to the window
+    fig_canvas_agg = draw_figure(window['-CANVAS-'].TKCanvas, fig)
+
+    event, values = window.read()
+    print(event, values)
+    
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'Previous':
+        window.close()
+        DataExplorerScreen2()
+    if event == 'Next':
+        window.close()
+        DataExplorerScreen1()
+        
+
+# def event():
+#     window = DataExplorerScreen1()  #window1 = login_main()
+#     while True:             # The Event Loop
+#         event, values = window.read()
+#         if event == None or event == 'Exit Application':
+#             window.close()
+#             break  
 
    
 
@@ -45,5 +223,6 @@ if __name__ == "__main__":
     # def function here
     #login_main()
     #Data_source_page()
-    event()
+    # event()
+    DataExplorerScreen1()
     pass
