@@ -238,27 +238,34 @@ def DataExplorerScreen1():
 
 def DataExplorerScreen2():
     # ---- MATPLOTLIB CODE HERE -----
-    labels = ['G1', 'G2', 'G3', 'G4', 'G5']
-    men_means = [20, 34, 30, 35, 27]
-    women_means = [25, 32, 34, 20, 25]
+    fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
 
-    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
-    t = np.arange(len(labels))
-    fig, ax = plt.subplots()
-    width = 0.35
-    rects1 = ax.bar(t - width/2, men_means, width, label='Men')
-    rects2 = ax.bar(t + width/2, women_means, width, label='Women')
+    recipe = ["375 g flour",
+          "75 g sugar",
+          "250 g butter",
+          "300 g berries"]
 
-    ax.set_ylabel('Scores')
-    ax.set_title('Scores by group and gender')
-    ax.set_xticks(t)
-    ax.set_xticklabels(labels)
-    ax.legend()
+    data = [float(x.split()[0]) for x in recipe]
+    ingredients = [x.split()[-1] for x in recipe]
 
-    ax.bar_label(rects1, padding=3)
-    ax.bar_label(rects2, padding=3)
 
-    fig.tight_layout()
+    def func(pct, allvals):
+        absolute = int(round(pct/100.*np.sum(allvals)))
+        return "{:.1f}%\n({:d} g)".format(pct, absolute)
+
+
+    wedges, texts, autotexts = ax.pie(data, autopct=lambda pct: func(pct, data),
+                                    textprops=dict(color="w"))
+
+    ax.legend(wedges, ingredients,
+            title="Ingredients",
+            loc="center left",
+            bbox_to_anchor=(1, 0, 0.5, 1))
+
+    plt.setp(autotexts, size=8, weight="bold")
+
+    ax.set_title("Matplotlib bakery: A pie")
+
 
     # ---- END OF MATPLOTLIB CODE ----
 
@@ -310,27 +317,17 @@ def DataExplorerScreen2():
 
 def DataExplorerScreen3():
     # ---- MATPLOTLIB CODE HERE -----
-    labels = ['G1', 'G2', 'G3', 'G4', 'G5']
-    men_means = [20, 34, 30, 35, 27]
-    women_means = [25, 32, 34, 20, 25]
+    t = np.arange(0.0, 2.0, 0.01)
+    s = 1 + np.sin(2 * np.pi * t)
 
-    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
-    t = np.arange(len(labels))
     fig, ax = plt.subplots()
-    width = 0.35
-    rects1 = ax.bar(t - width/2, men_means, width, label='Men')
-    rects2 = ax.bar(t + width/2, women_means, width, label='Women')
+    ax.plot(t, s)
 
-    ax.set_ylabel('Scores')
-    ax.set_title('Scores by group and gender')
-    ax.set_xticks(t)
-    ax.set_xticklabels(labels)
-    ax.legend()
+    ax.set(xlabel='time (s)', ylabel='voltage (mV)',
+        title='About as simple as it gets, folks')
+    ax.grid()
 
-    ax.bar_label(rects1, padding=3)
-    ax.bar_label(rects2, padding=3)
-
-    fig.tight_layout()
+    fig.savefig("test.png")
 
     # ---- END OF MATPLOTLIB CODE ----
 
