@@ -29,6 +29,38 @@ def login_main():
         Data_source_page()
     if event == 'Exit Application':
         window.close()
+        
+def login_main_Welcome():
+    layout = [
+        [sg.Text('Welcome')],
+        [sg.Text('Username')],
+        [sg.Button('View Data')],
+        [sg.Button('Logout')]]
+    window = sg.Window('Property Tiles Login Page', layout, finalize=True, size=(350, 150), element_justification='c')
+    event, values = window.read()
+    print(event, values)
+
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'View Data':
+        window.close()
+        Data_source_page()
+    if event == 'Exit Application':
+        window.close()
+        
+def login_main_Unsuccessful():
+    layout = [
+        [sg.Text('The entered password and or username is incorrect.\nPlease enter your correct username and password')],
+        [sg.Button('Login')]]
+    window = sg.Window('Property Tiles Login Page', layout, finalize=True, size=(350, 150), element_justification='c')
+    event, values = window.read()
+    print(event, values)
+
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'Login':
+        window.close()
+        login_main()
 
 def Data_source_page():
     layout = [
@@ -56,6 +88,27 @@ def Data_source_page():
     if event == 'Logout':
         window.close()
         login_main()
+        
+def Upload_new_data_page():
+    layout = [
+        [sg.Text('Title_No', size=(5,1)), sg.InputText('', size=(15,1))], 
+        [sg.Text('Status'), sg.InputText('', size=(15,1))], 
+        [sg.Text('Type'), sg.InputText('', size=(15,1))],
+        [sg.Text('Land_district'), sg.InputText('', size=(15,1))], 
+        [sg.Text('Issue_date'), sg.InputText('', size=(15,1))],
+        [sg.Text('Guarantee_Status'), sg.InputText('', size=(15,1))],
+        [sg.Text('Number_Owners'), sg.InputText('', size=(15,1))]
+        ]
+    window = sg.Window('Data Source Page', layout, finalize=True)
+
+    event, values = window.read()
+    print(event, values)
+
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'Back':
+        window.close()
+        Data_source_page()
 
 
 def DataExplorerScreen1():
@@ -282,4 +335,7 @@ if __name__ == "__main__":
     # Data_source_page()
     # event()
     # DataExplorerScreen1()
+    # login_main_Welcome()
+    # login_main_Unsuccessful()
+    Upload_new_data_page()
     pass
