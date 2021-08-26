@@ -4,12 +4,8 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import PySimpleGUI as sg
 import matplotlib
 matplotlib.use('TkAgg')
-"""
-Making test scripts for Data Explorer screens and various connecting interfaces
 
-"""
-
-
+# ------------------------------- LOGIN PAGE MAIN START -------------------------------
 def login_main():
     layout = [
         [sg.Text('Username:')],
@@ -29,14 +25,18 @@ def login_main():
         Data_source_page()
     if event == 'Exit Application':
         window.close()
-        
+# ------------------------------- LOGIN MAIN PAGE END -------------------------------
+
+# ------------------------------- LOGIN WELCOME PAGE START -------------------------------
+
 def login_main_Welcome():
     layout = [
         [sg.Text('Welcome')],
         [sg.Text('Username')],
         [sg.Button('View Data')],
         [sg.Button('Logout')]]
-    window = sg.Window('Property Tiles Login Page', layout, finalize=True, size=(350, 150), element_justification='c')
+    window = sg.Window('Property Tiles Login Page', layout,
+                       finalize=True, size=(350, 150), element_justification='c')
     event, values = window.read()
     print(event, values)
 
@@ -47,12 +47,16 @@ def login_main_Welcome():
         Data_source_page()
     if event == 'Exit Application':
         window.close()
-        
+# ------------------------------- LOGIN WELCOME PAGE END -------------------------------
+
+# ------------------------------- LOGIN ERROR PAGE START -------------------------------
+
 def login_main_Unsuccessful():
     layout = [
         [sg.Text('The entered password and or username is incorrect.\nPlease enter your correct username and password')],
         [sg.Button('Login')]]
-    window = sg.Window('Property Tiles Login Page', layout, finalize=True, size=(350, 150), element_justification='c')
+    window = sg.Window('Property Tiles Login Page', layout,
+                       finalize=True, size=(350, 150), element_justification='c')
     event, values = window.read()
     print(event, values)
 
@@ -61,6 +65,9 @@ def login_main_Unsuccessful():
     if event == 'Login':
         window.close()
         login_main()
+# ------------------------------- LOGIN ERROR PAGE END -------------------------------
+
+# ------------------------------- DATA SOURCE PAGE START-------------------------------
 
 def Data_source_page():
     layout = [
@@ -85,21 +92,44 @@ def Data_source_page():
     if event == 'Number of property owners':
         window.close()
         DataExplorerScreen3()
+    if event == 'Upload new data':
+        window.close()
+        Upload_new_data_page()
     if event == 'Logout':
         window.close()
         login_main()
-        
+# ------------------------------- DATA SOURCE PAGE END -------------------------------
+
+# ------------------------------- UPLOAD PAGE START -------------------------------
+
 def Upload_new_data_page():
     layout = [
-        [sg.Text('Title_No', size=(5,1)), sg.InputText('', size=(15,1))], 
-        [sg.Text('Status'), sg.InputText('', size=(15,1))], 
-        [sg.Text('Type'), sg.InputText('', size=(15,1))],
-        [sg.Text('Land_district'), sg.InputText('', size=(15,1))], 
-        [sg.Text('Issue_date'), sg.InputText('', size=(15,1))],
-        [sg.Text('Guarantee_Status'), sg.InputText('', size=(15,1))],
-        [sg.Text('Number_Owners'), sg.InputText('', size=(15,1))]
+            [sg.Frame(layout=[
+                [sg.Text('Title_No:', size=(14, 1)), sg.InputText(
+                    '', size=(15, 1))],
+                [sg.Text('Status:', size=(14, 1)), sg.InputText(
+                    '', size=(15, 1))],
+                [sg.Text('Type:', size=(14, 1)),
+                 sg.InputText('', size=(15, 1))],
+                [sg.Text('Land_district:', size=(14, 1)),
+                 sg.InputText('', size=(15, 1))],
+                [sg.Text('Issue_date:', size=(14, 1)),
+                 sg.InputText('', size=(15, 1))],
+                [sg.Text('Guarantee_Status:', size=(14, 1)),
+                 sg.InputText('', size=(15, 1))],
+                [sg.Text('Number_Owners:', size=(14, 1)),
+                 sg.InputText('', size=(15, 1))]
+            ], title=""), sg.Frame(layout=[
+
+                [sg.Text('Estate_description')],
+                [sg.Multiline('', size=(35, 5))]], title="")],
+            [sg.Button('Back'), sg.Button('Upload new data')]
+            
         ]
-    window = sg.Window('Data Source Page', layout, finalize=True)
+            
+    
+    window = sg.Window('Upload new data page', layout,
+                       finalize=True, size=(500, 250))
 
     event, values = window.read()
     print(event, values)
@@ -109,10 +139,33 @@ def Upload_new_data_page():
     if event == 'Back':
         window.close()
         Data_source_page()
+    if event == 'Upload new data':
+        window.close()
+        Upload_new_data_successful()
+# ------------------------------- UPLOAD PAGE END -------------------------------
 
+# ------------------------------- UPLOAD CONFIRMATION PAGE START -------------------------------
+
+def Upload_new_data_successful():
+    layout = [
+        [sg.Text('Success! New data has been added.')],
+        [sg.Button('Ok')]]
+    window = sg.Window('New data confirmation', layout,
+                       finalize=True, size=(350, 80), element_justification='c')
+    event, values = window.read()
+    print(event, values)
+
+    if event == None or event == 'Exit Application':
+        window.close()
+    if event == 'Ok':
+        window.close()
+        Upload_new_data_page()
+# ------------------------------- UPLOAD CONFIRMATION PAGE END -------------------------------
+
+# ------------------------------- DATA EXPLORER SCREEN ONE START -------------------------------
 
 def DataExplorerScreen1():
-    # ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE -------------------------------
+    # ---- MATPLOTLIB CODE HERE -----
     labels = ['G1', 'G2', 'G3', 'G4', 'G5']
     men_means = [20, 34, 30, 35, 27]
     women_means = [25, 32, 34, 20, 25]
@@ -135,9 +188,9 @@ def DataExplorerScreen1():
 
     fig.tight_layout()
 
-    # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
+    # ---- END OF MATPLOTLIB CODE ----
 
-    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+    # ---- Beginning of Matplotlib helper code ----
 
     def draw_figure(canvas, figure):
         figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
@@ -145,7 +198,7 @@ def DataExplorerScreen1():
         figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
         return figure_canvas_agg
 
-    # ------------------------------- Beginning of GUI CODE -------------------------------
+    # ---- Beginning of GUI CODE ----
 
     # define the window layout
     layout = [[sg.Canvas(key='-CANVAS-')],
@@ -179,10 +232,12 @@ def DataExplorerScreen1():
     if event == 'Logout':
         window.close()
         login_main()
+# ------------------------------- DATA EXPLORER SCREEN ONE END -------------------------------
 
+# ------------------------------- DATA EXPLORER SCREEN TWO START -------------------------------
 
 def DataExplorerScreen2():
-    # ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE -------------------------------
+    # ---- MATPLOTLIB CODE HERE -----
     labels = ['G1', 'G2', 'G3', 'G4', 'G5']
     men_means = [20, 34, 30, 35, 27]
     women_means = [25, 32, 34, 20, 25]
@@ -205,9 +260,9 @@ def DataExplorerScreen2():
 
     fig.tight_layout()
 
-    # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
+    # ---- END OF MATPLOTLIB CODE ----
 
-    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+    # ---- Beginning of Matplotlib helper code ----
 
     def draw_figure(canvas, figure):
         figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
@@ -215,7 +270,7 @@ def DataExplorerScreen2():
         figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
         return figure_canvas_agg
 
-    # ------------------------------- Beginning of GUI CODE -------------------------------
+    # ---- Beginning of GUI CODE ----
 
     # define the window layout
     layout = [[sg.Canvas(key='-CANVAS-')],
@@ -249,10 +304,12 @@ def DataExplorerScreen2():
     if event == 'Logout':
         window.close()
         login_main()
+# ------------------------------- DATA EXPLORER SCREEN TWO END -------------------------------
 
+# ------------------------------- DATA EXPLORER SCREEN THREE START -------------------------------
 
 def DataExplorerScreen3():
-    # ------------------------------- PASTE YOUR MATPLOTLIB CODE HERE -------------------------------
+    # ---- MATPLOTLIB CODE HERE -----
     labels = ['G1', 'G2', 'G3', 'G4', 'G5']
     men_means = [20, 34, 30, 35, 27]
     women_means = [25, 32, 34, 20, 25]
@@ -275,9 +332,9 @@ def DataExplorerScreen3():
 
     fig.tight_layout()
 
-    # ------------------------------- END OF YOUR MATPLOTLIB CODE -------------------------------
+    # ---- END OF MATPLOTLIB CODE ----
 
-    # ------------------------------- Beginning of Matplotlib helper code -----------------------
+    # ---- Beginning of Matplotlib helper code ----
 
     def draw_figure(canvas, figure):
         figure_canvas_agg = FigureCanvasTkAgg(figure, canvas)
@@ -285,7 +342,7 @@ def DataExplorerScreen3():
         figure_canvas_agg.get_tk_widget().pack(side='top', fill='both', expand=1)
         return figure_canvas_agg
 
-    # ------------------------------- Beginning of GUI CODE -------------------------------
+    # ---- Beginning of GUI CODE ----
 
     # define the window layout
     layout = [[sg.Canvas(key='-CANVAS-')],
@@ -319,23 +376,9 @@ def DataExplorerScreen3():
     if event == 'Logout':
         window.close()
         login_main()
-
-# def event():
-#     window = DataExplorerScreen1()  #window1 = login_main()
-#     while True:             # The Event Loop
-#         event, values = window.read()
-#         if event == None or event == 'Exit Application':
-#             window.close()
-#             break
-
+# ------------------------------- DATA EXPLORER SCREEN THREE END -------------------------------
 
 if __name__ == "__main__":
     # def function here
     login_main()
-    # Data_source_page()
-    # event()
-    # DataExplorerScreen1()
-    # login_main_Welcome()
-    # login_main_Unsuccessful()
-    Upload_new_data_page()
     pass
