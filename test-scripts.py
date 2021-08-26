@@ -238,7 +238,7 @@ def DataExplorerScreen1():
 
 def DataExplorerScreen2():
     # ---- MATPLOTLIB CODE HERE -----
-    fig, ax = plt.subplots(figsize=(6, 3), subplot_kw=dict(aspect="equal"))
+    fig, ax = plt.subplots(figsize=(7, 5), subplot_kw=dict(aspect="equal"))
 
     recipe = ["375 g flour",
           "75 g sugar",
