@@ -34,3 +34,8 @@ def Data_source_page():
         window.close()
         login.login_main()
 # ------------------------------- DATA SOURCE PAGE END -------------------------------
+
+if __name__ == "__main__":
+    # def function here
+    login.login_main()
+    pass

@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 import datasourcenav
+import login
 
 # ------------------------------- UPLOAD PAGE START -------------------------------
 
@@ -62,3 +63,8 @@ def Upload_new_data_successful():
         window.close()
         Upload_new_data_page()
 # ------------------------------- UPLOAD CONFIRMATION PAGE END -------------------------------
+
+if __name__ == "__main__":
+    # def function here
+    login.login_main()
+    pass

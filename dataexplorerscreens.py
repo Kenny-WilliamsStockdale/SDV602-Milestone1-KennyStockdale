@@ -218,3 +218,8 @@ def DataExplorerScreen3():
         window.close()
         login.login_main()
 # ------------------------------- DATA EXPLORER SCREEN THREE END -------------------------------
+
+if __name__ == "__main__":
+    # def function here
+    login.login_main()
+    pass
