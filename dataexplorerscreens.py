@@ -1,8 +1,8 @@
-    """ interactive screen showing graphical data to user.
+""" interactive screen showing graphical data to user.
 
     Returns:
         Data Explorer Screens layout shared between multiple interfaces -PySimpleGUI 
-    """
+"""
 
 import PySimpleGUI as sg
 import datasourcenav
