@@ -18,7 +18,7 @@ def login_main():
         [sg.InputText('')],
         [sg.Button('Login')],
         [sg.Button('Exit Application')]]
-    window = sg.Window('Property Tiles Login Page', layout, finalize=True)
+    window = sg.Window('Property Titles Login Page', layout, finalize=True)
     event, values = window.read()
     print(event, values)
 
@@ -42,7 +42,7 @@ def login_main_Welcome():
         [sg.Text('Username')],
         [sg.Button('View Data')],
         [sg.Button('Logout')]]
-    window = sg.Window('Property Tiles Login Page', layout,
+    window = sg.Window('Property Titles Login Page', layout,
                        finalize=True, size=(350, 150), element_justification='c')
     event, values = window.read()
     print(event, values)
@@ -65,7 +65,7 @@ def login_main_Unsuccessful():
     layout = [
         [sg.Text('The entered password and or username is incorrect.\nPlease enter your correct username and password')],
         [sg.Button('Login')]]
-    window = sg.Window('Property Tiles Login Page', layout,
+    window = sg.Window('Property Titles Login Page', layout,
                        finalize=True, size=(350, 150), element_justification='c')
     event, values = window.read()
     print(event, values)
