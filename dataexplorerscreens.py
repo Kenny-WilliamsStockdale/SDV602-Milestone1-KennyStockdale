@@ -172,7 +172,6 @@ def DataExplorerScreen3():
         title='About as simple as it gets, folks')
     ax.grid()
 
-    fig.savefig("test.png")
 
     # ---- END OF MATPLOTLIB CODE ----
 
