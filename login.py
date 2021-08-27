@@ -1,7 +1,16 @@
+"""
+    This presents the user with a login page to create a username and password 
+    to access the application.    
+"""
+
 import PySimpleGUI as sg
 import datasourcenav
 
-def login_main():
+# ------------------------------- LOGIN MAIN PAGE START -------------------------------
+def login_main():   
+    """
+       Function allows user to create or enter an existing password to login to the application
+    """    
     layout = [
         [sg.Text('Username:')],
         [sg.InputText('')],
@@ -25,6 +34,9 @@ def login_main():
 # ------------------------------- LOGIN WELCOME PAGE START -------------------------------
 
 def login_main_Welcome():
+    """
+        function opens welcome login page. Navigation to available
+    """    
     layout = [
         [sg.Text('Welcome')],
         [sg.Text('Username')],
@@ -47,6 +59,9 @@ def login_main_Welcome():
 # ------------------------------- LOGIN ERROR PAGE START -------------------------------
 
 def login_main_Unsuccessful():
+    """
+        function gives error message of user credentials
+    """    
     layout = [
         [sg.Text('The entered password and or username is incorrect.\nPlease enter your correct username and password')],
         [sg.Button('Login')]]
@@ -61,7 +76,7 @@ def login_main_Unsuccessful():
         window.close()
         login_main()
 # ------------------------------- LOGIN ERROR PAGE END -------------------------------
-
+# Invoking start script/function for user to begin the proccess of using the application.  
 if __name__ == "__main__":
     # def function here
     login_main()

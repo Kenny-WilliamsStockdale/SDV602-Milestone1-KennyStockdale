@@ -1,3 +1,6 @@
+"""
+    page that takes inputs to upload to data source
+"""
 import PySimpleGUI as sg
 import datasourcenav
 import login
@@ -5,6 +8,9 @@ import login
 # ------------------------------- UPLOAD PAGE START -------------------------------
 
 def Upload_new_data_page():
+    """
+        Function that allows user input to upload to data source
+    """    
     layout = [
             [sg.Frame(layout=[
                 [sg.Text('Title_No:', size=(14, 1)), sg.InputText(
@@ -49,6 +55,9 @@ def Upload_new_data_page():
 # ------------------------------- UPLOAD CONFIRMATION PAGE START -------------------------------
 
 def Upload_new_data_successful():
+    """
+        function returns successful upload of data
+    """    
     layout = [
         [sg.Text('Success! New data has been added.')],
         [sg.Button('Ok')]]
@@ -63,7 +72,7 @@ def Upload_new_data_successful():
         window.close()
         Upload_new_data_page()
 # ------------------------------- UPLOAD CONFIRMATION PAGE END -------------------------------
-
+# Invoking start script/function for user to begin the proccess of using the application.  
 if __name__ == "__main__":
     # def function here
     login.login_main()

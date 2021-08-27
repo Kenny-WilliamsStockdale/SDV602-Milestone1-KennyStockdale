@@ -1,3 +1,7 @@
+"""
+    Navigation of datasource interface
+"""
+
 import PySimpleGUI as sg
 import login
 import dataexplorerscreens
@@ -5,6 +9,9 @@ import uploadnewdata
 # ------------------------------- DATA SOURCE PAGE START-------------------------------
 
 def Data_source_page():
+    """
+        function allows user to navigation to data explorer screens 
+    """    
     layout = [
         [sg.Button('Property issue dates'),
          sg.Button('Current property status')],
@@ -34,7 +41,7 @@ def Data_source_page():
         window.close()
         login.login_main()
 # ------------------------------- DATA SOURCE PAGE END -------------------------------
-
+# Invoking start script/function for user to begin the proccess of using the application.  
 if __name__ == "__main__":
     # def function here
     login.login_main()

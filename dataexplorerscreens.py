@@ -1,3 +1,9 @@
+    """ interactive screen showing graphical data to user.
+
+    Returns:
+        Data Explorer Screens layout shared between multiple interfaces -PySimpleGUI 
+    """
+
 import PySimpleGUI as sg
 import datasourcenav
 import login
@@ -10,6 +16,11 @@ matplotlib.use('TkAgg')
 # ------------------------------- DATA EXPLORER SCREEN ONE START -------------------------------
 
 def DataExplorerScreen1():
+    """interactive screen showing graphical data to user. Includes navigation and chatsystem
+
+    Returns:
+        Data Explorer Screens layout shared between multiple interfaces -PySimpleGUI 
+    """    
     # ---- MATPLOTLIB CODE HERE -----
     labels = ['G1', 'G2', 'G3', 'G4', 'G5']
     men_means = [20, 34, 30, 35, 27]
@@ -82,6 +93,11 @@ def DataExplorerScreen1():
 # ------------------------------- DATA EXPLORER SCREEN TWO START -------------------------------
 
 def DataExplorerScreen2():
+    """interactive screen showing graphical data to user. Includes navigation and chatsystem
+
+    Returns:
+        Data Explorer Screens layout shared between multiple interfaces -PySimpleGUI 
+    """
     # ---- MATPLOTLIB CODE HERE -----
     fig, ax = plt.subplots(figsize=(7, 5), subplot_kw=dict(aspect="equal"))
 
@@ -161,6 +177,11 @@ def DataExplorerScreen2():
 # ------------------------------- DATA EXPLORER SCREEN THREE START -------------------------------
 
 def DataExplorerScreen3():
+    """interactive screen showing graphical data to user. Includes navigation and chatsystem
+
+    Returns:
+        Data Explorer Screens layout shared between multiple interfaces -PySimpleGUI 
+    """
     # ---- MATPLOTLIB CODE HERE -----
     t = np.arange(0.0, 2.0, 0.01)
     s = 1 + np.sin(2 * np.pi * t)
@@ -218,7 +239,7 @@ def DataExplorerScreen3():
         window.close()
         login.login_main()
 # ------------------------------- DATA EXPLORER SCREEN THREE END -------------------------------
-
+# Invoking start script/function for user to begin the proccess of using the application.  
 if __name__ == "__main__":
     # def function here
     login.login_main()
